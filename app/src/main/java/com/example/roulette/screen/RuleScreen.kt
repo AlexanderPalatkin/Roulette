@@ -53,7 +53,10 @@ fun RuleScreen() {
             durationMillis = 2000
         ), label = "",
         finishedListener = {
-            val index = (360 - (it % 360)) / (360f / NumberUtils.list.size)
+            var index = (360 - (it % 360)) / (360f / NumberUtils.list.size)
+            if (index.roundToInt() == 37) {
+                index = 0f
+            }
             number = NumberUtils.list[index.roundToInt()]
             redBlack = if (index.roundToInt() == 0) {
                 Color.White
@@ -77,7 +80,7 @@ fun RuleScreen() {
                 .wrapContentWidth(),
             text = number.toString(),
             fontWeight = FontWeight.Bold,
-            fontSize = 35.sp,
+            fontSize = 45.sp,
             color = redBlack
         )
         Box(
