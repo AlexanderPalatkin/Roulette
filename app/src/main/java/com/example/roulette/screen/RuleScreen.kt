@@ -44,6 +44,9 @@ fun RuleScreen() {
     var number by remember {
         mutableIntStateOf(0)
     }
+    var redBlack by remember {
+        mutableStateOf(Color.White)
+    }
 
     val angle by animateFloatAsState(
         targetValue = rotationValue,
@@ -53,6 +56,13 @@ fun RuleScreen() {
         finishedListener = {
             val index = (360 - (it % 360)) / (360f / NumberUtils.list.size)
             number = NumberUtils.list[index.roundToInt()]
+            redBlack = if (index.roundToInt() == 0) {
+                Color.White
+            } else if (index.roundToInt() % 2 == 0) {
+                Color.Black
+            } else {
+                Color.Red
+            }
         }
     )
 
@@ -69,7 +79,7 @@ fun RuleScreen() {
             text = number.toString(),
             fontWeight = FontWeight.Bold,
             fontSize = 35.sp,
-            color = Color.White
+            color = redBlack
         )
         Box(
             modifier = Modifier
